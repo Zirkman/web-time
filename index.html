@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="sk">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,7 @@
       padding: 0;
       box-sizing: border-box;
     }
-    
+
     .toggle {
       position: absolute;
       top: 1rem;
@@ -23,29 +24,29 @@
       transition: opacity 0.2s;
       color: #222;
     }
-    
+
     .toggle:hover {
       opacity: 1;
     }
-    
+
     body.dark .toggle {
-      color: #ede0ce;
+      color: #e8c799;
     }
-    
+
     body {
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #f5f5f5;
+      background: #dbdbdb;
       font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
       transition: background 0.3s, color 0.3s;
     }
-    
+
     body.dark {
       background: #1a1a2e;
     }
-    
+
     .clock {
       font-size: 8rem;
       font-weight: bold;
@@ -53,17 +54,18 @@
       letter-spacing: 0.05em;
       transition: color 0.3s, text-shadow 0.3s;
     }
-    
+
     body.dark .clock {
-      color: #ede0ce;
+      color: #dbdbdb;
       text-shadow: 0 0 30px rgba(100, 150, 255, 0.3);
     }
   </style>
 </head>
+
 <body>
   <button class="toggle" id="toggle">●</button>
   <div class="clock" id="clock">00:00</div>
-  
+
   <script>
     function updateClock() {
       const now = new Date();
@@ -71,23 +73,26 @@
       const minutes = now.getMinutes().toString().padStart(2, '0');
       document.getElementById('clock').textContent = `${hours}:${minutes}`;
     }
-    
+
     updateClock();
     setInterval(updateClock, 1000);
-    
+
     // Theme toggle
     const toggle = document.getElementById('toggle');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    if (prefersDark) {
+    const savedTheme = localStorage.getItem('theme');
+
+    if (savedTheme === 'dark') {
       document.body.classList.add('dark');
       toggle.textContent = '○';
     }
-    
+
     toggle.addEventListener('click', () => {
       document.body.classList.toggle('dark');
-      toggle.textContent = document.body.classList.contains('dark') ? '○' : '●';
+      const isDark = document.body.classList.contains('dark');
+      toggle.textContent = isDark ? '○' : '●';
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
     });
   </script>
 </body>
+
 </html>
