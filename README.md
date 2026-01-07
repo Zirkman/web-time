@@ -2,11 +2,16 @@
 
 Minimalist digital clock for browser.
 
+And now a change. For a change.
+
 ## Features
 
-- Large, readable time display
-- Light/dark theme with manual toggle
-- Auto-detects system theme on load
+-   Large, readable time display
+    
+-   Light/dark theme with manual toggle
+    
+-   Auto-detects system theme on load
+    
 
 ## Usage
 
